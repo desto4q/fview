@@ -28,3 +28,23 @@ Future getTop(int? page) async {
     rethrow;
   }
 }
+
+Future getid(String? id) async {
+  try {
+    var response = await Dio().get(
+        "https://dezz-consument.vercel.app/anime/gogoanime/info/${id ?? "naruto"}");
+    return response.data;
+  } catch (error) {
+    rethrow;
+  }
+}
+
+Future getEpisode(String? id) async {
+  try {
+    var response = await Dio().get(
+        "https://dezz-consument.vercel.app/anime/gogoanime/watch/$id?server=gogocdn");
+    return response.data;
+  } catch (error) {
+    rethrow;
+  }
+}

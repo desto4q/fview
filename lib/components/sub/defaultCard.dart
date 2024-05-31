@@ -1,4 +1,6 @@
+import 'package:clickable_widget/clickable_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:fview/screens/WatchScreen.dart';
 
 class DefaultCard extends StatelessWidget {
   const DefaultCard({super.key, required this.results, required this.index});
@@ -17,8 +19,13 @@ class DefaultCard extends StatelessWidget {
             height: 250,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                results[index]["image"],
+              child: ClickableImage(
+                clickableImageType: ClickableImageType.network,
+                onTap: () {
+                  Navigator.pushNamed(context, "/info",
+                      arguments: results[index]["id"]);
+                },
+                src: results[index]["image"],
                 fit: BoxFit.cover,
               ),
             ),
@@ -45,11 +52,16 @@ class DefaultCard extends StatelessWidget {
               child: Row(
                 children: [
                   TextButton(
-                    
                     style: TextButton.styleFrom(
                         backgroundColor: Colors.amber.shade700),
                     onPressed: () {
-                      Navigator.pushNamed(context, "/info",arguments: "passed String");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WatchScreen(
+                                    item_id: results[index],
+                                    episode: results[index]["episodeId"],
+                                  )));
                     },
                     child: Text(
                       'EP:${results[index]["episodeNumber"].toString()}',

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fquery/fquery.dart';
-import 'package:fview/components/videoapp.dart';
 import 'package:fview/intro.dart';
 import 'package:fview/screens/Infopage.dart';
-import 'package:fview/screens/videopage.dart';
 import 'package:media_kit/media_kit.dart';
 
 var queryclient = QueryClient();

@@ -19,7 +19,8 @@ void main() {
 }
 
 class MyScreen extends StatefulWidget {
-  const MyScreen({super.key});
+  const MyScreen({super.key, this.url});
+  final url;
   @override
   State<MyScreen> createState() => MyScreenState();
 }
@@ -38,8 +39,7 @@ class MyScreenState extends State<MyScreen> {
   void initState() {
     super.initState();
     // Play a [Media] or [Playlist].
-    player.open(Media(
-        'https://user-images.githubusercontent.com/28951144/229373695-22f88f13-d18f-4288-9bf1-c3e078d83722.mp4'));
+    player.open(Media(widget.url));
   }
 
   @override
@@ -50,6 +50,7 @@ class MyScreenState extends State<MyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Center(
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
