@@ -23,8 +23,9 @@ class _IntroState extends State<Intro> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
+    // VideoPage(),
     const Text(
-      'Likes',
+      'Search',
       style: optionStyle,
     ),
     const Text(
@@ -40,7 +41,6 @@ class _IntroState extends State<Intro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       drawer: Drawer(
         backgroundColor: Colors.red,
         child: ListView(
@@ -48,8 +48,9 @@ class _IntroState extends State<Intro> {
           children: const [Text("home"), Text("home"), Text("home")],
         ),
       ),
-      body: Center(
-        child: _widgetOptions.elementAt(_selected_index),
+      body: IndexedStack(
+        index: _selected_index,
+        children: _widgetOptions,
       ),
       bottomNavigationBar: Container(
         color: Colors.black,

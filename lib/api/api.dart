@@ -18,3 +18,13 @@ Future getPopular(int? page) async {
     rethrow;
   }
 }
+
+Future getTop(int? page) async {
+  try {
+    var response = await Dio().get(
+        "https://dezz-consument.vercel.app/anime/gogoanime/top-airing?page=${page ?? 1}");
+    return response.data;
+  } catch (error) {
+    rethrow;
+  }
+}
