@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fview/components/carousel.dart';
+import 'package:fview/components/recent_releases.dart';
 import 'package:fview/components/sub/hometitle.dart';
 import 'package:fview/components/top_airing.dart';
 
@@ -14,7 +15,7 @@ class HomePage extends HookWidget {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: addGaps(
-            const [Hometitle(), Carousel(), TopAiringComp()],
+            const [Hometitle(), Carousel(), TopAiringComp(),RecentReleaseComp()],
             10,
           ),
         ),

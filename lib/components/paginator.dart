@@ -53,7 +53,7 @@ class _PaginatorState extends State<Paginator> {
                         currentPage = 0;
                       });
                     },
-                    child: Text('<<'),
+                    child: const Text('<<'),
                   ),
                 if (currentPage > 0)
                   ElevatedButton(
@@ -62,7 +62,7 @@ class _PaginatorState extends State<Paginator> {
                         currentPage--;
                       });
                     },
-                    child: Text('<'),
+                    child: const Text('<'),
                   ),
                 if (endIndex < widget.items.length)
                   ElevatedButton(
@@ -71,7 +71,7 @@ class _PaginatorState extends State<Paginator> {
                         currentPage++;
                       });
                     },
-                    child: Text('>'),
+                    child: const Text('>'),
                   ),
                 if (endIndex < widget.items.length)
                   ElevatedButton(
@@ -81,7 +81,7 @@ class _PaginatorState extends State<Paginator> {
                             (widget.items.length / itemsPerPage).ceil() - 1;
                       });
                     },
-                    child: Text('>>'),
+                    child: const Text('>>'),
                   ),
               ], 10)
             ],

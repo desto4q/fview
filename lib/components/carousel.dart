@@ -52,7 +52,8 @@ class Carousel extends HookWidget {
             height: screenHeight * 0.7,
             // enableInfiniteScroll: true,
             viewportFraction: 0.8,
-            enlargeCenterPage: true,
+            
+            // enlargeCenterPage: true,
           ),
         )
       ],

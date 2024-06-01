@@ -1,6 +1,9 @@
 import 'package:clickable_widget/clickable_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:fview/components/infomodal.dart';
+import 'package:fview/screens/Infopage.dart';
 import 'package:fview/screens/WatchScreen.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class DefaultCard extends StatelessWidget {
   const DefaultCard({super.key, required this.results, required this.index});
@@ -21,6 +24,11 @@ class DefaultCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               child: ClickableImage(
                 clickableImageType: ClickableImageType.network,
+                onLongPress: () {
+                  showCupertinoModalBottomSheet(
+                      context: context,
+                      builder: (context) => InfoModal(id: results[index]["id"],controller: ModalScrollController.of(context),));
+                },
                 onTap: () {
                   Navigator.pushNamed(context, "/info",
                       arguments: results[index]["id"]);

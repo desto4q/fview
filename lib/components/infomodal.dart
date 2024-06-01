@@ -5,9 +5,10 @@ import 'package:fquery/fquery.dart';
 import 'package:fview/api/api.dart';
 import 'package:fview/components/paginator.dart';
 
-class InfoPage extends HookWidget {
-  const InfoPage({super.key, required this.id});
+class InfoModal extends HookWidget {
+  const InfoModal({super.key, required this.id,this.controller});
   final String id;
+  final controller;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class InfoPage extends HookWidget {
             : query.isError
                 ? Center(child: Text(query.error!.toString()))
                 : SingleChildScrollView(
+                  controller: controller,
                     child: Center(
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),

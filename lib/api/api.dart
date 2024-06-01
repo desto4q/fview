@@ -48,3 +48,12 @@ Future getEpisode(String? id) async {
     rethrow;
   }
 }
+Future getRecent(int? page) async {
+  try {
+    var response = await Dio().get(
+        "https://dezz-consument.vercel.app/anime/gogoanime/recent-episodes?page=${page ?? 1}");
+    return response.data;
+  } catch (error) {
+    rethrow;
+  }
+}
