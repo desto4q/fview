@@ -1,9 +1,9 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fquery/fquery.dart';
 import 'package:fview/api/api.dart';
 import 'package:fview/components/sub/carouselItem.dart';
+import 'package:infinite_carousel/infinite_carousel.dart';
 
 class Carousel extends HookWidget {
   const Carousel({super.key});
@@ -45,17 +45,23 @@ class Carousel extends HookWidget {
           ),
         ),
         const SizedBox(height: 12), // Add gap directly instead of addGaps
-        CarouselSlider(
-          
-          items: carouselItems,
-          options: CarouselOptions(
-            height: screenHeight * 0.7,
-            // enableInfiniteScroll: true,
-            viewportFraction: 0.8,
-            
-            // enlargeCenterPage: true,
-          ),
-        )
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.7,
+          child: InfiniteCarousel.builder(
+              itemCount: results.length,
+              anchor: 0.0,
+              velocityFactor: 0.2,
+              controller: ScrollController(),
+              itemExtent: 420,
+              physics: const BouncingScrollPhysics(), // Enable finger drag
+              itemBuilder: (context, itemIndex, realIndex) {
+                final item = results[itemIndex];
+                return CarouselItem(
+                  parentWidth: MediaQuery.of(context).size.width,
+                  item: item,
+                );
+              }),
+        ),
       ],
     );
   }

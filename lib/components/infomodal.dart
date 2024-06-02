@@ -12,7 +12,7 @@ class InfoModal extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final query = useQuery([id], () => getid(id));
+    final query = useQuery([id,"InfoModal"], () => getid(id));
 
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;

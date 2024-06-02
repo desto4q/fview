@@ -26,12 +26,34 @@ class DefaultCard extends StatelessWidget {
                 clickableImageType: ClickableImageType.network,
                 onLongPress: () {
                   showCupertinoModalBottomSheet(
-                      context: context,
-                      builder: (context) => InfoModal(id: results[index]["id"],controller: ModalScrollController.of(context),));
+                    context: context,
+                    builder: (context) => InfoModal(
+                      id: results[index]["id"],
+                      controller: ModalScrollController.of(context),
+                    ),
+                  );
                 },
                 onTap: () {
-                  Navigator.pushNamed(context, "/info",
-                      arguments: results[index]["id"]);
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      pageBuilder: (context, animation, secondaryAnimation) => InfoPage(
+                        id: results[index]["id"],
+                      ),
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        const begin = Offset(1.0, 0.0);
+                        const end = Offset.zero;
+                        const curve = Curves.easeInOut;
+
+                        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+                        return SlideTransition(
+                          position: animation.drive(tween),
+                          child: child,
+                        );
+                      },
+                    ),
+                  );
                 },
                 src: results[index]["image"],
                 fit: BoxFit.cover,
@@ -46,13 +68,10 @@ class DefaultCard extends StatelessWidget {
             child: Text(
               results[index]["title"],
               textAlign: TextAlign.center,
-              maxLines: 1, // Set max lines to 2
+              maxLines: 1, // Set max lines to 1
               overflow: TextOverflow.ellipsis, // Add ellipsis if text overflows
             ),
           ),
-          // SizedBox(
-          //   height: 2,
-          // ),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 4),
             child: Padding(
@@ -64,12 +83,26 @@ class DefaultCard extends StatelessWidget {
                         backgroundColor: Colors.amber.shade700),
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WatchScreen(
-                                    item_id: results[index],
-                                    episode: results[index]["episodeId"],
-                                  )));
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder: (context, animation, secondaryAnimation) => WatchScreen(
+                            item_id: results[index],
+                            episode: results[index]["episodeId"],
+                          ),
+                          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                            const begin = Offset(0.0, 1.0);
+                            const end = Offset.zero;
+                            const curve = Curves.easeInOut;
+
+                            var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+
+                            return SlideTransition(
+                              position: animation.drive(tween),
+                              child: child,
+                            );
+                          },
+                        ),
+                      );
                     },
                     child: Text(
                       'EP:${results[index]["episodeNumber"].toString()}',

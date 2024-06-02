@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fquery/fquery.dart';
 import 'package:fview/api/api.dart';
 import 'package:fview/components/sub/defaultCard.dart';
+import 'package:fview/screens/topairing_screen.dart';
 
 class TopAiringComp extends HookWidget {
   const TopAiringComp({super.key});
@@ -42,7 +43,10 @@ class TopAiringComp extends HookWidget {
                 ),
                 ElevatedButton.icon(
                   onPressed: () {
-                    // Add your navigation logic here
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>AiringScreen()),
+                    );
                   },
                   icon: const Icon(Icons.arrow_forward),
                   label: const Text("See more"),

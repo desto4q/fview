@@ -6,7 +6,7 @@ class CarouselItem extends StatefulWidget {
   const CarouselItem({super.key, this.item, required this.parentWidth});
   final item;
   final double parentWidth;
-
+  
   @override
   State<CarouselItem> createState() => _CarouselItemState();
 }
@@ -30,7 +30,7 @@ class _CarouselItemState extends State<CarouselItem> {
 
   @override
   Widget build(BuildContext context) {
-    final contwidth = MediaQuery.of(context).size.width;
+    // final contwidth = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Stack(
@@ -48,7 +48,7 @@ class _CarouselItemState extends State<CarouselItem> {
             bottom: 0,
             left: 0,
             child: Container(
-              width: contwidth * 0.79 - 28,
+              width: 420-20,
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 gradient: LinearGradient(
