@@ -65,7 +65,7 @@ class _CarouselItemState extends State<CarouselItem> {
                   children: [
                     SizedBox(
                       width:
-                          widget.parentWidth, // Example usage of parent width
+                          420-20, // Example usage of parent width
                       child: Text(
                         widget.item["title"],
                         softWrap: true,
@@ -77,7 +77,7 @@ class _CarouselItemState extends State<CarouselItem> {
                     ),
                     SizedBox(
                       width:
-                          widget.parentWidth, // Example usage of parent width
+                          420-20, // Example usage of parent width
                       child: Text(
                         widget.item["releaseDate"],
                         softWrap: true,

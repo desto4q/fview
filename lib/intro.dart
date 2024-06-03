@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fview/screens/homepage.dart';
+import 'package:fview/screens/searchscreen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
 class Intro extends StatefulWidget {
@@ -24,10 +25,7 @@ class _IntroState extends State<Intro> {
   static final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
     // VideoPage(),
-    const Text(
-      'Search',
-      style: optionStyle,
-    ),
+  SearchPage(),
     const Text(
       'Search',
       style: optionStyle,

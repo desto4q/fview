@@ -45,7 +45,7 @@ class RecentReleaseComp extends HookWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => RecentScreen()),
+                      MaterialPageRoute(builder: (context) => const RecentScreen()),
                     );
                   },
                   icon: const Icon(Icons.arrow_forward),

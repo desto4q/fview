@@ -44,23 +44,25 @@ class Carousel extends HookWidget {
             style: TextStyle(fontSize: 16),
           ),
         ),
-        const SizedBox(height: 12), // Add gap directly instead of addGaps
+        const SizedBox(height: 12),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.7,
+          height: screenHeight * 0.7,
           child: InfiniteCarousel.builder(
-              itemCount: results.length,
-              anchor: 0.0,
-              velocityFactor: 0.2,
-              controller: ScrollController(),
-              itemExtent: 420,
-              physics: const BouncingScrollPhysics(), // Enable finger drag
-              itemBuilder: (context, itemIndex, realIndex) {
-                final item = results[itemIndex];
-                return CarouselItem(
-                  parentWidth: MediaQuery.of(context).size.width,
-                  item: item,
-                );
-              }),
+            itemCount: results.length,
+            itemExtent: 420,
+            anchor: 0.0,
+            velocityFactor: 0.2,
+            center: false,
+            loop: true,
+            physics: const BouncingScrollPhysics(), // Enable finger drag
+            itemBuilder: (context, itemIndex, realIndex) {
+              final item = results[itemIndex];
+              return CarouselItem(
+                parentWidth: MediaQuery.of(context).size.width,
+                item: item,
+              );
+            },
+          ),
         ),
       ],
     );

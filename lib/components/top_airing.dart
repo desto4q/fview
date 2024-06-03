@@ -45,7 +45,7 @@ class TopAiringComp extends HookWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>AiringScreen()),
+                      MaterialPageRoute(builder: (context) =>const AiringScreen()),
                     );
                   },
                   icon: const Icon(Icons.arrow_forward),

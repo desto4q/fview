@@ -7,7 +7,7 @@ import 'package:fview/screens/Infopage.dart';
 import 'package:fview/utils/utils.dart';
 
 class AiringScreen extends HookWidget {
-  AiringScreen({super.key});
+  const AiringScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class AiringScreen extends HookWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: page.value > 1
                   ? () {
                       page.value--;
@@ -35,7 +35,7 @@ class AiringScreen extends HookWidget {
             ),
             Text('Page ${page.value}'),
             IconButton(
-              icon: Icon(Icons.arrow_forward),
+              icon: const Icon(Icons.arrow_forward),
               onPressed: () {
                 page.value++;
               },
@@ -53,10 +53,10 @@ class AiringScreen extends HookWidget {
                 key: ValueKey('loading'), child: CircularProgressIndicator())
             : query.isError
                 ? Center(
-                    key: ValueKey('error'),
+                    key: const ValueKey('error'),
                     child: Text(query.error!.toString()))
                 : ListView.builder(
-                    key: ValueKey('list'),
+                    key: const ValueKey('list'),
                     itemCount: results["results"].length,
                     itemBuilder: (context, index) {
                       final item = results["results"][index];
@@ -65,7 +65,7 @@ class AiringScreen extends HookWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             children: [
-                              Container(
+                              SizedBox(
                                 height: 140,
                                 width: 140 * 12 / 16,
                                 child: ClipRRect(
@@ -75,7 +75,7 @@ class AiringScreen extends HookWidget {
                                       fit: BoxFit.cover,
                                     )),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                   width:
                                       8), // Add some spacing between image and title
                               Expanded(
@@ -133,7 +133,7 @@ class AiringScreen extends HookWidget {
                                             ),
                                           );
                                         },
-                                        child: Text("Watch"),
+                                        child: const Text("Watch"),
                                       ),
                                     ], 10)
                                   ],
