@@ -85,7 +85,7 @@ class InfoModal extends HookWidget {
                                     ),
                                   ),
                                   const SizedBox(height: 10),
-                                  Paginator(items: query.data["episodes"]),
+                                  Paginator(items: query.data["episodes"],item_id: query.data,),
                                 ],
                               ),
                             ),

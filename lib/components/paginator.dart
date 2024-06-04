@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:fview/screens/WatchScreen.dart';
 import 'package:fview/utils/utils.dart';
 
 class Paginator extends StatefulWidget {
-  const Paginator({super.key, required this.items});
+  const Paginator({super.key, required this.items, required this.item_id});
   final List items;
+  final item_id;
 
   @override
   State<Paginator> createState() => _PaginatorState();
@@ -33,7 +35,35 @@ class _PaginatorState extends State<Paginator> {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 2),
                     child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          print([episode, widget.item_id]);
+
+                          Navigator.pushReplacement(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder:
+                                  (context, animation, secondaryAnimation) =>
+                                      WatchScreen(
+                                item_id: widget.item_id,
+                                episode: episode["id"],
+                              ),
+                              transitionsBuilder: (context, animation,
+                                  secondaryAnimation, child) {
+                                const begin = Offset(0.0, 1.0);
+                                const end = Offset.zero;
+                                const curve = Curves.easeInOut;
+
+                                var tween = Tween(begin: begin, end: end)
+                                    .chain(CurveTween(curve: curve));
+
+                                return SlideTransition(
+                                  position: animation.drive(tween),
+                                  child: child,
+                                );
+                              },
+                            ),
+                          );
+                        },
                         child: Align(
                           alignment: Alignment.centerLeft,
                           child: Text("Episode: ${episode["number"]}"),

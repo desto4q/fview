@@ -1,45 +1,33 @@
 import 'package:flutter/material.dart';
-
-// Make sure to add following packages to pubspec.yaml:
-// * media_kit
-// * media_kit_video
-// * media_kit_libs_video
-import 'package:media_kit/media_kit.dart'; // Provides [Player], [Media], [Playlist] etc.
-import 'package:media_kit_video/media_kit_video.dart'; // Provides [VideoController] & [Video] etc.
-
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  // Necessary initialization for package:media_kit.
-  MediaKit.ensureInitialized();
-  runApp(
-    const MaterialApp(
-      home: MyScreen(),
-    ),
-  );
-}
+import 'package:media_kit/media_kit.dart';
+import 'package:media_kit_video/media_kit_video.dart';
 
 class MyScreen extends StatefulWidget {
-  const MyScreen({super.key, this.url});
-  final url;
+  const MyScreen({Key? key, required this.url}) : super(key: key);
+  final String url;
+
   @override
   State<MyScreen> createState() => MyScreenState();
 }
 
 class MyScreenState extends State<MyScreen> {
-  // Create a [Player] to control playback.
-  late final player = Player();
-  // Create a [VideoController] to handle video output from [Player].
-  late final controller = VideoController(player,
-      configuration: const VideoControllerConfiguration(
-        enableHardwareAcceleration: false,
-        // hwdec: "mpv"
-      ));
+  late final Player player;
+  late final VideoController controller;
 
   @override
   void initState() {
     super.initState();
-    // Play a [Media] or [Playlist].
+    player = Player();
+    controller = VideoController(player, configuration: const VideoControllerConfiguration(enableHardwareAcceleration: true));
     player.open(Media(widget.url));
+  }
+
+  @override
+  void didUpdateWidget(covariant MyScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.url != widget.url) {
+      player.open(Media(widget.url));
+    }
   }
 
   @override
@@ -50,12 +38,10 @@ class MyScreenState extends State<MyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Center(
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.width * 9.0 / 16.0,
-        // Use [Video] widget to display video output.
         child: Video(controller: controller),
       ),
     );

@@ -54,17 +54,20 @@ class InfoPage extends HookWidget {
                                 children: [
                                   Text(
                                     query.data["title"],
-                                    style: Theme.of(context).textTheme.titleLarge,
+                                    style:
+                                        Theme.of(context).textTheme.titleLarge,
                                     textAlign: TextAlign.center,
                                   ),
                                   const SizedBox(height: 10),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(query.data["releaseDate"]),
                                       Text(query.data["subOrDub"]),
                                       Text(query.data["status"]),
-                                      Text("Episodes: ${query.data["totalEpisodes"]}"),
+                                      Text(
+                                          "Episodes: ${query.data["totalEpisodes"]}"),
                                     ],
                                   ),
                                   const SizedBox(height: 10),
@@ -83,7 +86,10 @@ class InfoPage extends HookWidget {
                                     ),
                                   ),
                                   const SizedBox(height: 10),
-                                  Paginator(items: query.data["episodes"]),
+                                  Paginator(
+                                    items: query.data["episodes"],
+                                    item_id: query.data,
+                                  ),
                                 ],
                               ),
                             ),
