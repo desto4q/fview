@@ -30,7 +30,7 @@ class _CarouselItemState extends State<CarouselItem> {
 
   @override
   Widget build(BuildContext context) {
-    // final contwidth = MediaQuery.of(context).size.width;
+    final contwidth = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Stack(
@@ -48,7 +48,7 @@ class _CarouselItemState extends State<CarouselItem> {
             bottom: 0,
             left: 0,
             child: Container(
-              width: 420-20,
+              width: contwidth * 0.745,
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 gradient: LinearGradient(
@@ -65,7 +65,7 @@ class _CarouselItemState extends State<CarouselItem> {
                   children: [
                     SizedBox(
                       width:
-                          420-20, // Example usage of parent width
+                          420, // Example usage of parent width
                       child: Text(
                         widget.item["title"],
                         softWrap: true,
@@ -77,7 +77,7 @@ class _CarouselItemState extends State<CarouselItem> {
                     ),
                     SizedBox(
                       width:
-                          420-20, // Example usage of parent width
+                          420, // Example usage of parent width
                       child: Text(
                         widget.item["releaseDate"],
                         softWrap: true,
