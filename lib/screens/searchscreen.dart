@@ -10,7 +10,7 @@ class SearchPage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final searchTrm = useState<String>("pace");
+    final searchTrm = useState<String>("naruto");
     final page = useState<int>(1);
     final myController = TextEditingController();
     final query = useQuery([searchTrm.value, page.value],
@@ -26,22 +26,13 @@ class SearchPage extends HookWidget {
         page.value--;
       }
     }
+
     return Scaffold(
-      // appBar: ,
+      
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 20),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ...addGapsHorizontal([
-                  IconButton(onPressed:decrementPage, icon: Icon(Icons.remove)),
-                  Text(page.value.toString()),
-                  IconButton(onPressed:incrementPage, icon: Icon(Icons.add)),
-                ], 10)
-              ],
-            ),
             Row(
               children: [
                 Expanded(
@@ -56,11 +47,22 @@ class SearchPage extends HookWidget {
                   onPressed: () {
                     if (myController.text.length > 0) {
                       searchTrm.value = myController.text;
-                      page.value =1;
+                      page.value = 1;
                     } else {}
                   },
                   icon: const Icon(Icons.search),
                 ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ...addGapsHorizontal([
+                  IconButton(
+                      onPressed: decrementPage, icon: Icon(Icons.remove)),
+                  Text(page.value.toString()),
+                  IconButton(onPressed: incrementPage, icon: Icon(Icons.add)),
+                ], 10)
               ],
             ),
             const SizedBox(height: 8),

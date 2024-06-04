@@ -1,6 +1,9 @@
+import 'package:clickable_widget/clickable_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:fview/components/infomodal.dart';
 import 'package:fview/screens/Infopage.dart';
 import 'package:fview/utils/utils.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class SearchCard extends StatelessWidget {
   const SearchCard({super.key, required this.results, required this.index});
@@ -10,7 +13,17 @@ class SearchCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final image_src = results[index]["image"];
-    return Container(
+    return ClickableContainer(
+      onLongPress: () {
+        // print(results[index]);
+        showCupertinoModalBottomSheet(
+          context: context,
+          builder: (context) => InfoModal(
+            id: results[index]["id"],
+            controller: ModalScrollController.of(context),
+          ),
+        );
+      },
       margin: EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -65,9 +78,9 @@ class SearchCard extends StatelessWidget {
                             Navigator.push(
                               context,
                               PageRouteBuilder(
-                                pageBuilder: (context, animation,
-                                        secondaryAnimation) =>
-                                    InfoPage(id: results[index]["id"]),
+                                pageBuilder:
+                                    (context, animation, secondaryAnimation) =>
+                                        InfoPage(id: results[index]["id"]),
                               ),
                             );
                           },
