@@ -79,3 +79,13 @@ Future getGenrelist() async {
     rethrow;
   }
 }
+
+Future getGenre(String id, int page) async {
+  try {
+    var response = await Dio().get(
+        "https://dezz-consument.vercel.app/anime/gogoanime/genre/$id?page=${page }");
+    return response.data;
+  } catch (err) {
+    rethrow;
+  }
+}
