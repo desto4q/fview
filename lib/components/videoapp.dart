@@ -18,7 +18,12 @@ class MyScreenState extends State<MyScreen> {
   void initState() {
     super.initState();
     player = Player();
-    controller = VideoController(player, configuration: const VideoControllerConfiguration(enableHardwareAcceleration: true));
+    controller = VideoController(
+      player,
+      configuration: const VideoControllerConfiguration(
+        enableHardwareAcceleration: true,
+      ),
+    );
     player.open(Media(widget.url));
   }
 
@@ -38,12 +43,25 @@ class MyScreenState extends State<MyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.width * 9.0 / 16.0,
-        child: Video(controller: controller),
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        double aspectRatio = 16 / 9;
+        double width = constraints.maxWidth;
+        double height = width / aspectRatio;
+
+        if (height > constraints.maxHeight) {
+          height = constraints.maxHeight;
+          width = height * aspectRatio;
+        }
+
+        return Center(
+          child: SizedBox(
+            width: width,
+            height: height,
+            child: Video(controller: controller),
+          ),
+        );
+      },
     );
   }
 }

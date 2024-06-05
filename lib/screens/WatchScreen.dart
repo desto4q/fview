@@ -31,7 +31,7 @@ class WatchScreen extends HookWidget {
       appBar: AppBar(),
       body: Column(
         children: [
-          MyScreen(url: finUrl.value ),
+          MyScreen(url: finUrl.value),
           // Text(item_id["id"].toString()),
           Padding(
             padding: const EdgeInsets.all(8.0),

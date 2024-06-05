@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fview/screens/genereScreen.dart';
 import 'package:fview/screens/homepage.dart';
 import 'package:fview/screens/searchscreen.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -25,11 +26,8 @@ class _IntroState extends State<Intro> {
   static final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
     // VideoPage(),
-  SearchPage(),
-    const Text(
-      'Search',
-      style: optionStyle,
-    ),
+    SearchPage(),
+    GenreList(),
     const Text(
       'Profile',
       style: optionStyle,

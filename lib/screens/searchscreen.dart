@@ -28,69 +28,71 @@ class SearchPage extends HookWidget {
     }
 
     return Scaffold(
-      
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 20),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: myController,
-                    decoration:
-                        const InputDecoration(hintText: "search here...."),
+  
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: myController,
+                      decoration:
+                          const InputDecoration(hintText: "search here...."),
+                    ),
                   ),
-                ),
-                IconButton(
-                  color: Colors.grey.shade800,
-                  onPressed: () {
-                    if (myController.text.length > 0) {
-                      searchTrm.value = myController.text;
-                      page.value = 1;
-                    } else {}
-                  },
-                  icon: const Icon(Icons.search),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ...addGapsHorizontal([
                   IconButton(
-                      onPressed: decrementPage, icon: Icon(Icons.remove)),
-                  Text(page.value.toString()),
-                  IconButton(onPressed: incrementPage, icon: Icon(Icons.add)),
-                ], 10)
-              ],
-            ),
-            const SizedBox(height: 8),
-            Expanded(
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 400),
-                child: query.isLoading
-                    ? const Center(
-                        key: ValueKey('loading'),
-                        child: CircularProgressIndicator())
-                    : query.isError
-                        ? Center(
-                            key: const ValueKey('error'),
-                            child: Text(query.error!.toString()))
-                        : ListView.builder(
-                            key: const ValueKey('list'),
-                            itemCount: query.data["results"].length,
-                            itemBuilder: (context, index) {
-                              final item = query.data["results"][index];
-                              return SearchCard(
-                                index: index,
-                                results: query.data["results"],
-                              );
-                            },
-                          ),
+                    color: Colors.grey.shade800,
+                    onPressed: () {
+                      if (myController.text.length > 0) {
+                        searchTrm.value = myController.text;
+                        page.value = 1;
+                      } else {}
+                    },
+                    icon: const Icon(Icons.search),
+                  ),
+                ],
               ),
-            ),
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ...addGapsHorizontal([
+                    IconButton(
+                        onPressed: decrementPage, icon: Icon(Icons.remove)),
+                    Text(page.value.toString()),
+                    IconButton(onPressed: incrementPage, icon: Icon(Icons.add)),
+                  ], 10)
+                ],
+              ),
+              const SizedBox(height: 8),
+              Expanded(
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 400),
+                  child: query.isLoading
+                      ? const Center(
+                          key: ValueKey('loading'),
+                          child: CircularProgressIndicator())
+                      : query.isError
+                          ? Center(
+                              key: const ValueKey('error'),
+                              child: Text(query.error!.toString()))
+                          : ListView.builder(
+                              key: const ValueKey('list'),
+                              itemCount: query.data["results"].length,
+                              itemBuilder: (context, index) {
+                                final item = query.data["results"][index];
+                                return SearchCard(
+                                  index: index,
+                                  results: query.data["results"],
+                                );
+                              },
+                            ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

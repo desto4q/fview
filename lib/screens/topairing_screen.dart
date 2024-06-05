@@ -8,7 +8,6 @@ import 'package:fview/utils/utils.dart';
 
 class AiringScreen extends HookWidget {
   const AiringScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     // Page state managed by a hook
@@ -20,6 +19,7 @@ class AiringScreen extends HookWidget {
     final results = query.data;
 
     return Scaffold(
+      
       appBar: AppBar(
         toolbarHeight: 50,
         title: Row(
