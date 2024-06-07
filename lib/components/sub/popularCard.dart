@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:fview/api/api.dart';
 import 'package:fview/screens/Infopage.dart';
@@ -71,15 +70,51 @@ class PopularCard extends StatelessWidget {
                               ...addGapsHorizontal([
                                 IconButton(
                                   onPressed: () async {
-                                    var resp = await getid(index["id"]);
-                                    var details = {
-                                      "id": resp["id"],
-                                      "title": resp["title"],
-                                      "image": resp['image'],
-                                      "subOrDub": resp["subOrDub"],
-                                    };
-                                    print(details);
-                                    addtoFav(details);
+                                    // Show "Adding..." snackbar
+
+                                    ScaffoldMessenger.of(context)
+                                        .hideCurrentSnackBar();
+                                    final addingSnackBar = SnackBar(
+                                      content: const Text('Adding...'),
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(addingSnackBar);
+
+                                    try {
+                                      // Perform the operation
+                                      var resp = await getid(index["id"]);
+                                      var details = {
+                                        "id": resp["id"],
+                                        "title": resp["title"],
+                                        "image": resp['image'],
+                                        "subOrDub": resp["subOrDub"],
+                                      };
+                                      addtoFav(details);
+
+                                      // If successful, show "Added" snackbar
+                                      final addedSnackBar = SnackBar(
+                                        content: const Text('Added'),
+                                        action: SnackBarAction(
+                                          label: 'Undo',
+                                          onPressed: () {
+                                            // Some code to undo the change.
+                                          },
+                                        ),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .hideCurrentSnackBar();
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(addedSnackBar);
+                                    } catch (e) {
+                                      // If there is an error, show "Failed to add" snackbar
+                                      final failedSnackBar = SnackBar(
+                                        content: const Text('Failed to add'),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .hideCurrentSnackBar();
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(failedSnackBar);
+                                    }
                                   },
                                   icon: Icon(Icons.favorite),
                                   style: ButtonStyle(

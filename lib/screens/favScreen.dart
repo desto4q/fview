@@ -13,7 +13,7 @@ class FavScreen extends StatefulWidget {
 
 class _FavScreenState extends State<FavScreen> {
   Box FavBox = Hive.box("favorites");
-   int FavBoxLength=0;
+  int FavBoxLength = 0;
 
   @override
   void initState() {
@@ -34,33 +34,36 @@ class _FavScreenState extends State<FavScreen> {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: Text("favorites"),
-                ),
-                Material(
-                  color: Colors.green.shade700,
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  child: InkWell(
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    child: Text("favorites"),
+                  ),
+                  Material(
+                    color: Colors.green.shade700,
                     borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    onTap: () {
-                      setState(() {
-                        FavBoxLength = FavBox.values.length;
-                      });
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(10),
-                      child: const Text(
-                        "reload",
-                        style: TextStyle(fontSize: 12),
+                    child: InkWell(
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                      onTap: () {
+                        setState(() {
+                          FavBoxLength = FavBox.values.length;
+                        });
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        child: const Text(
+                          "reload",
+                          style: TextStyle(fontSize: 12),
+                        ),
                       ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
             Expanded(
               child: GridView.builder(
