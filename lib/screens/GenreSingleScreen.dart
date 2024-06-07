@@ -113,7 +113,7 @@ class GenreSingle extends HookWidget {
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                         Text(
-                                          "Episodes: ${item["episodeNumber"].toString()}",
+                                          "Released Date: ${item["released"].toString()}",
                                           softWrap: true,
                                           maxLines: 1,
                                           overflow: TextOverflow.ellipsis,

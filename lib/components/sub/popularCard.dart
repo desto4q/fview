@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:fview/api/api.dart';
 import 'package:fview/screens/Infopage.dart';
 import 'package:fview/utils/utils.dart';
 
@@ -70,7 +70,17 @@ class PopularCard extends StatelessWidget {
                             children: [
                               ...addGapsHorizontal([
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () async {
+                                    var resp = await getid(index["id"]);
+                                    var details = {
+                                      "id": resp["id"],
+                                      "title": resp["title"],
+                                      "image": resp['image'],
+                                      "subOrDub": resp["subOrDub"],
+                                    };
+                                    print(details);
+                                    addtoFav(details);
+                                  },
                                   icon: Icon(Icons.favorite),
                                   style: ButtonStyle(
                                       backgroundColor:
@@ -81,26 +91,35 @@ class PopularCard extends StatelessWidget {
                                 ElevatedButton(
                                     onPressed: () {
                                       Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      pageBuilder: (context, animation, secondaryAnimation) => InfoPage(
-                        id: index["id"],
-                      ),
-                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                        const begin = Offset(1.0, 0.0);
-                        const end = Offset.zero;
-                        const curve = Curves.easeInOut;
+                                        context,
+                                        PageRouteBuilder(
+                                          pageBuilder: (context, animation,
+                                                  secondaryAnimation) =>
+                                              InfoPage(
+                                            id: index["id"],
+                                          ),
+                                          transitionsBuilder: (context,
+                                              animation,
+                                              secondaryAnimation,
+                                              child) {
+                                            const begin = Offset(1.0, 0.0);
+                                            const end = Offset.zero;
+                                            const curve = Curves.easeInOut;
 
-                        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                                            var tween = Tween(
+                                                    begin: begin, end: end)
+                                                .chain(
+                                                    CurveTween(curve: curve));
 
-                        return SlideTransition(
-                          position: animation.drive(tween),
-                          child: child,
-                        );
-                      },
-                    ),
-                  );
-                                    }, child: Text("watch"))
+                                            return SlideTransition(
+                                              position: animation.drive(tween),
+                                              child: child,
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    },
+                                    child: Text("watch"))
                               ], 10)
                             ],
                           )

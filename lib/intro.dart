@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fview/screens/favScreen.dart';
 import 'package:fview/screens/genereScreen.dart';
 import 'package:fview/screens/homepage.dart';
 import 'package:fview/screens/searchscreen.dart';
@@ -28,10 +29,7 @@ class _IntroState extends State<Intro> {
     // VideoPage(),
     SearchPage(),
     GenreList(),
-    const Text(
-      'Profile',
-      style: optionStyle,
-    ),
+    FavScreen(),
   ];
 
   @override

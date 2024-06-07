@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:palette_generator/palette_generator.dart';
 
 List<Widget> addGaps(List<Widget> items, double gapHeight) {
@@ -28,6 +31,18 @@ Future<Color?> pickColor(String url) async {
     var pallete = PaletteGenerator.fromImageProvider(NetworkImage(url));
     return pallete.then((value) => value.dominantColor?.color);
   } catch (err) {
+    rethrow;
+  }
+}
+
+
+addtoFav (item) async{
+  var Favbox = await Hive.openBox("favorites");
+  var endcoded_item = json.encode(item);
+  try {
+    var response = Favbox.put(item["id"],endcoded_item);
+  }
+  catch(err){
     rethrow;
   }
 }

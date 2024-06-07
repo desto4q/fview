@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fview/main.dart';
 
 class Hometitle extends StatelessWidget {
   const Hometitle({super.key});
@@ -19,7 +20,7 @@ class Hometitle extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text("Fview"),
+           Text(box.get("name").toString()),
             IconButton(
               onPressed: tapper,
               icon: const Icon(Icons.search),
