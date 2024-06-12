@@ -8,7 +8,6 @@ import 'package:media_kit/media_kit.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'dart:convert';
 import 'dart:io' show Platform; // Import to check platform
 
 var queryclient = QueryClient();

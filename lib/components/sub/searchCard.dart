@@ -1,4 +1,3 @@
-import 'package:clickable_widget/clickable_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:fview/components/infomodal.dart';
 import 'package:fview/screens/Infopage.dart';

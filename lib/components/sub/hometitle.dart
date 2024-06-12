@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fview/main.dart';
 
 class Hometitle extends StatelessWidget {
   const Hometitle({super.key});

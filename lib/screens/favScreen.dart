@@ -48,8 +48,11 @@ class _FavScreenState extends State<FavScreen> {
                       Material(
                         color: Colors.red,
                         child: InkWell(
-                          onTap: (){
-                            FavBox.clear();
+                          onTap: ()async {
+                            await FavBox.clear();
+                            setState(() {
+                              FavBoxLength = FavBox.values.length;
+                            });
                           },
                           child: Container(
                             padding: EdgeInsets.all(4),
@@ -57,6 +60,7 @@ class _FavScreenState extends State<FavScreen> {
                           ),
                         ),
                       ),
+                      SizedBox(width: 4,),
                       Material(
                         color: Colors.green.shade700,
                         borderRadius:

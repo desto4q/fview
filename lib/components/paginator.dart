@@ -36,7 +36,7 @@ class _PaginatorState extends State<Paginator> {
                     padding: const EdgeInsets.symmetric(vertical: 2),
                     child: TextButton(
                         onPressed: () {
-                          print([episode, widget.item_id]);
+                          // print([episode, widget.item_id]);
 
                           Navigator.pushReplacement(
                             context,

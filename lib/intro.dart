@@ -22,8 +22,6 @@ class _IntroState extends State<Intro> {
   }
 
   int _selected_index = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   static final List<Widget> _widgetOptions = <Widget>[
     const HomePage(),
     // VideoPage(),

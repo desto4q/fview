@@ -82,7 +82,7 @@ class SearchPage extends HookWidget {
                               key: const ValueKey('list'),
                               itemCount: query.data["results"].length,
                               itemBuilder: (context, index) {
-                                final item = query.data["results"][index];
+                                // final item = query.data["results"][index];
                                 return SearchCard(
                                   index: index,
                                   results: query.data["results"],

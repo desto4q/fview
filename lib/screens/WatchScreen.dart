@@ -60,7 +60,7 @@ class WatchScreen extends HookWidget {
                   children: [
                     Text(episode.toString()),
                     details_query.isLoading
-                        ? Center(
+                        ? const Center(
                             child: CircularProgressIndicator(),
                           )
                         : details_query.isError
