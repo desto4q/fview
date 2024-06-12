@@ -10,21 +10,21 @@ class Hometitle extends StatelessWidget {
       print("tapped");
     }
 
-    return SizedBox(
+    return const SizedBox(
       height: 40,
       // color: Colors.amber,
       child: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: 10), // Horizontal padding only
+        padding: const EdgeInsets.symmetric(
+            horizontal: 10), // Horizontal padding only
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-           Text(box.get("name").toString()),
-            IconButton(
-              onPressed: tapper,
-              icon: const Icon(Icons.search),
-            ),
+            Text("fview"),
+            // IconButton(
+            //   onPressed: tapper,
+            //   icon: const Icon(Icons.search),
+            // ),
           ],
         ),
       ),

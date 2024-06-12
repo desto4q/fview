@@ -41,26 +41,44 @@ class _FavScreenState extends State<FavScreen> {
                 children: [
                   Container(
                     padding: EdgeInsets.all(10),
-                    child: Text("favorites"),
+                    child: const Text("favorites"),
                   ),
-                  Material(
-                    color: Colors.green.shade700,
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    child: InkWell(
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      onTap: () {
-                        setState(() {
-                          FavBoxLength = FavBox.values.length;
-                        });
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(10),
-                        child: const Text(
-                          "reload",
-                          style: TextStyle(fontSize: 12),
+                  Row(
+                    children: [
+                      Material(
+                        color: Colors.red,
+                        child: InkWell(
+                          onTap: (){
+                            FavBox.clear();
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(4),
+                            child: Text("delete all"),
+                          ),
                         ),
                       ),
-                    ),
+                      Material(
+                        color: Colors.green.shade700,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(10)),
+                        child: InkWell(
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(10)),
+                          onTap: () {
+                            setState(() {
+                              FavBoxLength = FavBox.values.length;
+                            });
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(10),
+                            child: const Text(
+                              "reload",
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   )
                 ],
               ),

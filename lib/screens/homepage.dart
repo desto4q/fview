@@ -10,15 +10,13 @@ class HomePage extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
+    return SafeArea(
+      child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView.builder(
           itemCount: _itemCount(),
           itemBuilder: (context, index) {
-            return KeepAliveWrapper(
-              child: _buildItem(index),
-            );
+            return _buildItem(index);
           },
         ),
       ),
@@ -27,9 +25,7 @@ class HomePage extends HookWidget {
 
   int _itemCount() {
     // Number of widgets plus the gaps between them
-    return const [Hometitle(), PopularComp(),TopAiringComp(), RecentReleaseComp()].length *
-            2 -
-        1;
+    return const [Hometitle(), PopularComp(), TopAiringComp(), RecentReleaseComp()].length * 2 - 1;
   }
 
   Widget _buildItem(int index) {
@@ -45,25 +41,4 @@ class HomePage extends HookWidget {
       return const SizedBox(height: 10);
     }
   }
-}
-
-class KeepAliveWrapper extends StatefulWidget {
-  final Widget child;
-
-  const KeepAliveWrapper({required this.child, Key? key}) : super(key: key);
-
-  @override
-  _KeepAliveWrapperState createState() => _KeepAliveWrapperState();
-}
-
-class _KeepAliveWrapperState extends State<KeepAliveWrapper>
-    with AutomaticKeepAliveClientMixin {
-  @override
-  Widget build(BuildContext context) {
-    super.build(context);
-    return widget.child;
-  }
-
-  @override
-  bool get wantKeepAlive => true;
 }
