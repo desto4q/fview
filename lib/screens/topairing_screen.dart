@@ -3,8 +3,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fquery/fquery.dart';
 import 'package:fview/api/api.dart';
 import 'package:clickable_widget/clickable_widget.dart';
+import 'package:fview/components/infomodal.dart';
 import 'package:fview/screens/Infopage.dart';
 import 'package:fview/utils/utils.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class AiringScreen extends HookWidget {
   const AiringScreen({super.key});
@@ -19,7 +21,6 @@ class AiringScreen extends HookWidget {
     final results = query.data;
 
     return Scaffold(
-      
       appBar: AppBar(
         toolbarHeight: 50,
         title: Row(
@@ -60,86 +61,108 @@ class AiringScreen extends HookWidget {
                     itemCount: results["results"].length,
                     itemBuilder: (context, index) {
                       final item = results["results"][index];
-                      return ClickableCard(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                height: 140,
-                                width: 140 * 12 / 16,
-                                child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.network(
-                                      item["image"],
-                                      fit: BoxFit.cover,
-                                    )),
-                              ),
-                              const SizedBox(
-                                  width:
-                                      8), // Add some spacing between image and title
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ...addGaps([
-                                      Text(
-                                        item["title"],
-                                        softWrap: true,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      Text(
-                                        "Episodes: ${item["episodeNumber"].toString()}",
-                                        softWrap: true,
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                      TextButton(
-                                        style: ButtonStyle(
-                                          backgroundColor:
-                                              MaterialStateProperty.resolveWith(
-                                                  (states) =>
-                                                      Colors.grey.shade800),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                              pageBuilder: (context, animation,
-                                                      secondaryAnimation) =>
-                                                  InfoPage(
-                                                id:item["id"],
-                                              ),
-                                              transitionsBuilder: (context,
-                                                  animation,
-                                                  secondaryAnimation,
-                                                  child) {
-                                                const begin = Offset(1.0, 0.0);
-                                                const end = Offset.zero;
-                                                const curve = Curves.easeInOut;
-
-                                                var tween = Tween(
-                                                        begin: begin, end: end)
-                                                    .chain(CurveTween(
-                                                        curve: curve));
-
-                                                return SlideTransition(
-                                                  position:
-                                                      animation.drive(tween),
-                                                  child: child,
-                                                );
-                                              },
-                                            ),
-                                          );
-                                        },
-                                        child: const Text("Watch"),
-                                      ),
-                                    ], 10)
-                                  ],
+                      return Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey.shade900,
+                          child: InkWell(
+                            onLongPress: () {
+                              showCupertinoModalBottomSheet(
+                                context: context,
+                                builder: (context) => InfoModal(
+                                  id: item["id"],
+                                  controller: ModalScrollController.of(context),
                                 ),
+                              );
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    height: 140,
+                                    width: 140 * 12 / 16,
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.network(
+                                          item["image"],
+                                          fit: BoxFit.cover,
+                                        )),
+                                  ),
+                                  const SizedBox(
+                                      width:
+                                          8), // Add some spacing between image and title
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        ...addGaps([
+                                          Text(
+                                            item["title"],
+                                            softWrap: true,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          Text(
+                                            "Episodes: ${item["episodeNumber"].toString()}",
+                                            softWrap: true,
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          TextButton(
+                                            style: ButtonStyle(
+                                              backgroundColor:
+                                                  MaterialStateProperty
+                                                      .resolveWith((states) =>
+                                                          Colors.grey.shade800),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                PageRouteBuilder(
+                                                  pageBuilder: (context,
+                                                          animation,
+                                                          secondaryAnimation) =>
+                                                      InfoPage(
+                                                    id: item["id"],
+                                                  ),
+                                                  transitionsBuilder: (context,
+                                                      animation,
+                                                      secondaryAnimation,
+                                                      child) {
+                                                    const begin =
+                                                        Offset(1.0, 0.0);
+                                                    const end = Offset.zero;
+                                                    const curve =
+                                                        Curves.easeInOut;
+
+                                                    var tween = Tween(
+                                                            begin: begin,
+                                                            end: end)
+                                                        .chain(CurveTween(
+                                                            curve: curve));
+
+                                                    return SlideTransition(
+                                                      position: animation
+                                                          .drive(tween),
+                                                      child: child,
+                                                    );
+                                                  },
+                                                ),
+                                              );
+                                            },
+                                            child: const Text("Watch"),
+                                          ),
+                                        ], 10)
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
                       );

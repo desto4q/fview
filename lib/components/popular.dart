@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fquery/fquery.dart';
 import 'package:fview/api/api.dart';
+import 'package:fview/components/error_comp.dart';
 import 'package:fview/components/sub/popularCard.dart';
 
 class PopularComp extends HookWidget {
@@ -10,8 +11,6 @@ class PopularComp extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final query = useQuery(["popular"], () => getPopular(1));
-
-   
 
     // if (query.data == null || !query.data.containsKey('results')) {
     //   return Center(
@@ -33,17 +32,13 @@ class PopularComp extends HookWidget {
         );
       },
       child: ConstrainedBox(
-        constraints: BoxConstraints(minHeight: width * 17/14),
+        constraints: BoxConstraints(minHeight: width * 17 / 14),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: query.isLoading
               ? const Center(child: CircularProgressIndicator())
               : query.isError
-                  ? Center(
-                      child: ElevatedButton(
-                      onPressed: query.refetch,
-                      child: Text("refetch"),
-                    ))
+                  ? ErrorComp(refetch: query.refetch)
                   : Row(
                       children: [
                         ...query.data["results"].map((e) => PopularCard(

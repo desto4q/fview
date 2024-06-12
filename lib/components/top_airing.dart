@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fquery/fquery.dart';
 import 'package:fview/api/api.dart';
+import 'package:fview/components/error_comp.dart';
 import 'package:fview/components/sub/defaultCard.dart';
 import 'package:fview/screens/topairing_screen.dart';
 
@@ -17,7 +18,7 @@ class TopAiringComp extends HookWidget {
     }
 
     if (query.isError) {
-      return Center(child: Text(query.error!.toString()));
+      return ErrorComp(refetch: query.refetch);
     }
 
     if (query.data == null || !query.data.containsKey('results')) {
@@ -45,7 +46,8 @@ class TopAiringComp extends HookWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) =>const AiringScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const AiringScreen()),
                     );
                   },
                   icon: const Icon(Icons.arrow_forward),

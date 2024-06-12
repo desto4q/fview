@@ -46,3 +46,12 @@ addtoFav (item) async{
     rethrow;
   }
 }
+
+showSnackBar(item,context) async{
+  try {
+
+  }
+  catch(err){
+    
+  }
+}
